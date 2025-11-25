@@ -12,7 +12,21 @@ while not fin_juego:
             print()
         elif op_menu0==2:
             print(titulo.format(" Menu02 Create "), menu02)
+            op_menu02=int(input("-> Option: "))
             jugando=False
+            menu_02=True
+            while menu_02:
+                if op_menu02==1:
+                    print(titulo.format("Menu021 New Character"))
+                    new_name=input("Name of the new character:\n ")
+                elif op_menu02==2:
+                    print(titulo.format(" Menu022 (New Weapon) "))
+                    new_weapon=input("Name of the new weapon:\n")
+                elif op_menu02==3:
+                    menu_02=False
+                else:
+                    print()
+                
             
 
         elif op_menu0==3:
