@@ -49,28 +49,74 @@ dict_ranks = { 1 : {"name" : "Admiral","members": [9,10,11]},
 
 dict_categorys = {1:"Straw hat",2:"Pirates Buggy",3:"Pirates Rocks", 4:"Admiral",5:"ViceAdmiral",6:"Lieutenant"}
 
-
+#================MENUS=====================
 titulo = "\n"+"=" * 20 + "{}" + "=" * 20+"\n"
 menu0="\n1) Play\n2) Create\n3) Edit\n4) List\n5) Exit"
 menu02="\n1) Create Character\n2) Create Weapon\n3) Go back"
+menu03="\n1) Edit character\n2) Edit weapon\n3) Go back"
+menu031="\n1) Name\n2) Weapon\n3) Go Back"
+side="\n1) Marine\n2) Pirates"
 
-
+#=========FLAGS===========
 fin_juego=False
 jugando=True
+equipo=True
+#=========STATS===========
+ganador=" "
 while not fin_juego:
         print(titulo.format(" Menu 0 (One Piece) "), menu0)
         op_menu0=int(input("\n-> Option: "))
         if op_menu0==1:
             print()
+
+
+
+#====================================
+# ========MENU02(CREATE)=============
+# ===================================            
         elif op_menu0==2:
             
             menu_02=True
             while  menu_02:
                 print(titulo.format(" Menu02 Create "), menu02)
+                
                 op_menu02=int(input("\n-> Option: "))
                 if op_menu02==1:
                     print(titulo.format("Menu021 New Character"))
+                    #accedemos al ultimo id para añadir uno despues
+                    ultimo_id=0
+                    for i in dict_characters:
+                        if i >ultimo_id:
+                            ultimo_id=i
+                    nuevo_id=ultimo_id+1
                     new_name=input("Name of the new character:\n ")
+
+
+                    while equipo:
+                        print("\nType of the new character: ", side)
+                        op_side=int(input("\n->Optioin: "))
+                        if op_side==1:
+                            #=========
+                            #==RANKS==
+                            #=========
+                            for rank in dict_categorys:
+                                print(dict_categorys[-1])
+                                print(dict_categorys[-2])
+                                print(dict_categorys[-3])
+                                
+                            op_rank=int(input("\n->Option: "))
+                            equipo=False
+                        elif op_side==2:
+                            #============
+                            #==category==
+                            #============
+                            print()
+                            equipo=False
+                        else:
+                            print(titulo.format("INVALID OPTION"))
+                            input("Press enter to continue")
+                            equipo=True
+                    
                 elif op_menu02==2:
                     print(titulo.format(" Menu022 (New Weapon) "))
                     new_weapon=input("Name of the new weapon:\n")
@@ -81,9 +127,30 @@ while not fin_juego:
                     menu_02=False
                 
             
-
+#====================================
+# ==========MENU03 (EDIT)============
+# ===================================  
         elif op_menu0==3:
-            print()
+             menu_03=True
+             while  menu_03:
+                print(titulo.format(" Menu03 (Edit Menu) "), menu03)
+                op_menu03=int(input("\n-> Option: "))
+                if op_menu03==1:
+                    print(titulo.format("Menu031 (Select Charcater to edit)"))
+                    id_edit=input("ID to edit:\n ")
+                    print("\nSelect feature to edit to character ID: ", id_edit)
+                    print(menu031)
+                elif op_menu03==2:
+                    print(titulo.format(" Menu032 (Select Weapon to Edit) "))
+                    new_weapon=input("Name of the new weapon:\n")
+                elif op_menu03==3:
+                    menu_03=False
+                else:
+                    print("Opcion invalida")
+                    menu_03=False
+                
+            
+           
         elif op_menu0==4:
             print()
         elif op_menu0==5:
