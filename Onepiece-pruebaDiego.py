@@ -167,7 +167,9 @@ while not fin_juego:
                         else: 
                             
                             edit_menu=False
-                            print(f"\nSelect feature to edit to character ID: {id_edit}\n1. Name\n2. Category\n3. Weapon\n4. Strenght\n5. Speed ")
+                            nombre_personaje = dict_characters[id_edit]["name"]
+                            print(f"\nSelect feature to edit to character ID: {id_edit}, Name: {nombre_personaje}")
+                            print(f"\n1. Name\n2. Category\n3. Weapon\n4. Strenght\n5. Speed ")
                             op=int(input("\n-> Option: "))
                             if op ==1:
                                 edit_new_name=input("Put the nwe name of character")
