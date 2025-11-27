@@ -61,6 +61,7 @@ side="\n1) Marine\n2) Pirates"
 fin_juego=False
 jugando=True
 equipo=True
+edit_menu=True
 #=========STATS===========
 ganador=" "
 while not fin_juego:
@@ -100,6 +101,11 @@ while not fin_juego:
                             #==RANKS==
                             #=========
                             for rank in dict_categorys:
+
+                                #************************************
+                                #ESTO  DE ABAJO ESTÁ MAL CORREGIR MAS TARDE
+
+                                #****************************
                                 print(dict_categorys[-1])
                                 print(dict_categorys[-2])
                                 print(dict_categorys[-3])
@@ -136,10 +142,43 @@ while not fin_juego:
                 print(titulo.format(" Menu03 (Edit Menu) "), menu03)
                 op_menu03=int(input("\n-> Option: "))
                 if op_menu03==1:
-                    print(titulo.format("Menu031 (Select Charcater to edit)"))
-                    id_edit=input("ID to edit:\n ")
-                    print("\nSelect feature to edit to character ID: ", id_edit)
-                    print(menu031)
+                    while edit_menu:
+                        print(titulo.format("Menu031 (Select Charcater to edit)"))
+                        print("\n" + "="*60)
+                        print("ID".ljust(5), "NAME".ljust(15),"CATEGORY".ljust(10), "WEAPONS".ljust(10), "STRENGHT".ljust(10), "SPEED".ljust(10))
+                        print("="*60)
+
+                        for key in dict_characters:
+                            name = dict_characters[key]["name"]
+                            category = str(dict_characters[key]["category"])
+                            weapons = str(dict_characters[key]["weapons"])
+                            strength = str(dict_characters[key]["strength"])
+                            speed = str(dict_characters[key]["speed"])
+                            
+
+                            print(str(key).ljust(5), name.ljust(15), category.ljust(10), weapons.ljust(10), strength.ljust(10), speed.ljust(10))
+
+                        print("="*60 + "\n")
+
+                        id_edit=int(input("ID to edit:\n "))
+                        if id_edit not in dict_characters:
+                            print("Opcion no valida")
+                            edit_menu=True
+                        else: 
+                            
+                            edit_menu=False
+                            print(f"\nSelect feature to edit to character ID: {id_edit}\n1. Name\n2. Category\n3. Weapon\n4. Strenght\n5. Speed ")
+                            op=int(input("\n-> Option: "))
+                            if op ==1:
+                                edit_new_name=input("Put the nwe name of character")
+                            elif op ==2:
+                                print("Select de new category")
+                            elif op ==3:
+                                print("New Weapon")
+                            elif op ==4:
+                                print("Choose de level of strenght 1-9")
+                            elif op ==5:
+                                print("Choose de level of speed 1-9")
                 elif op_menu03==2:
                     print(titulo.format(" Menu032 (Select Weapon to Edit) "))
                     new_weapon=input("Name of the new weapon:\n")
