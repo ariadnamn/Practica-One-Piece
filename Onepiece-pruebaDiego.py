@@ -61,7 +61,8 @@ side="\n1) Marine\n2) Pirates"
 fin_juego=False
 jugando=True
 equipo=True
-edit_menu=True
+
+
 #=========STATS===========
 ganador=" "
 while not fin_juego:
@@ -142,6 +143,7 @@ while not fin_juego:
                 print(titulo.format(" Menu03 (Edit Menu) "), menu03)
                 op_menu03=int(input("\n-> Option: "))
                 if op_menu03==1:
+                    edit_menu=True
                     while edit_menu:
                         print(titulo.format("Menu031 (Select Charcater to edit)"))
                         print("\n" + "="*60)
@@ -168,19 +170,82 @@ while not fin_juego:
                             
                             edit_menu=False
                             nombre_personaje = dict_characters[id_edit]["name"]
-                            print(f"\nSelect feature to edit to character ID: {id_edit}, Name: {nombre_personaje}")
-                            print(f"\n1. Name\n2. Category\n3. Weapon\n4. Strenght\n5. Speed ")
-                            op=int(input("\n-> Option: "))
-                            if op ==1:
-                                edit_new_name=input("Put the nwe name of character")
-                            elif op ==2:
-                                print("Select de new category")
-                            elif op ==3:
-                                print("New Weapon")
-                            elif op ==4:
-                                print("Choose de level of strenght 1-9")
-                            elif op ==5:
-                                print("Choose de level of speed 1-9")
+                            editing=True
+                            while editing:
+                                print(f"\nSelect feature to edit to character ID: {id_edit}, Name: {nombre_personaje}")
+                                print("\n1. Name"
+                                      "\n2. Category"
+                                      "\n3. Weapon"
+                                      "\n4. Strenght"
+                                      "\n5. Speed")
+                                op=int(input("\n-> Option: "))
+                                if op ==1:
+                                    edit_menu=True
+                                    edit_new_name=input("Put the nwe name of character: ")
+                                    dict_characters[id_edit]["name"]=edit_new_name
+                                    print(f"\nName changed successfully! New name: {dict_characters[id_edit]['name']}")
+                                    continue_editing=True
+                                    while continue_editing:
+                                        op_continue_editing_name=input("Do you want continue editing? Y/N: ").lower()
+                                        
+                                        if op_continue_editing_name=="y":
+                                            #SOLO SALIMOS DEL BUCLE PARA EDITAR EL NAME
+                                            continue_editing=False 
+                                        elif op_continue_editing_name=="n":
+                                            #SALIMOS DE TODOS LOS WHILE Y VOLVEMOS AL MENU PRINCIPAL
+                                            continue_editing=False
+                                            editing=False
+                                            edit_menu=False
+                                            menu_03=False
+                                        else:
+                                            print("Incorrect option")
+                                            continue_editing=True                    
+                                elif op ==2:
+                                    
+                                    # 1) Mostrar categoría actual
+                                    categoria_actual_id = dict_characters[id_edit]["category"]
+                                    categoria_actual_nombre = dict_categorys[categoria_actual_id]
+                                    print(f"\nCurrent category: {categoria_actual_nombre} (ID: {categoria_actual_id})")
+
+                                    # 2) Mostrar todas las categorías disponibles
+                                    print("\nAvailable categories:")
+                                    for cat_id in dict_categorys:
+                                        print(f"{cat_id}. {dict_categorys[cat_id]}")
+
+                                    # 3) Pedir nueva categoría
+                                    nueva_categoria = int(input("\nSelect the new category ID: "))
+
+                                    # 4) Validar
+                                    if nueva_categoria in dict_categorys:
+                                        dict_characters[id_edit]["category"] = nueva_categoria
+                                        print(f"\nCategory changed successfully! New category: {dict_categorys[nueva_categoria]}")
+                                    else:
+                                        print("\nInvalid category ID. Category not changed.")
+
+                                    # 5) Preguntar si quiere seguir editando este personaje
+                                    op_continue = input("\nDo you want to continue editing this character? Y/N: ").lower()
+                                    if op_continue == "y":
+                                        # seguimos en el while editing (no tocamos flags)
+                                        pass
+                                    elif op_continue == "n":
+                                        editing = False
+                                        edit_menu = False
+                                        menu_03 = False
+                                    else:
+                                        print("Incorrect option, returning to edit menu.")
+                                        editing = False
+                                        edit_menu = False
+                                        menu_03 = False
+
+                                elif op ==3:
+                                    print("New Weapon")
+                                elif op ==4:
+                                    print("Choose de level of strenght 1-9")
+                                elif op ==5:
+                                    print("Choose de level of speed 1-9")
+                                elif op==6:
+                                    editing=False
+                                    edit_menu=False
                 elif op_menu03==2:
                     print(titulo.format(" Menu032 (Select Weapon to Edit) "))
                     new_weapon=input("Name of the new weapon:\n")
