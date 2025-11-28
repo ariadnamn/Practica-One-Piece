@@ -202,40 +202,37 @@ while not fin_juego:
                                             continue_editing=True                    
                                 elif op ==2:
                                     
-                                    # 1) Mostrar categoría actual
+                                    #SCAMOS LA CATEGORIA ACTUAL DEL PERS. SELCCIONADO
                                     categoria_actual_id = dict_characters[id_edit]["category"]
                                     categoria_actual_nombre = dict_categorys[categoria_actual_id]
-                                    print(f"\nCurrent category: {categoria_actual_nombre} (ID: {categoria_actual_id})")
+                                    print(f"\nYour category now is: {categoria_actual_nombre} (ID: {categoria_actual_id})")
 
-                                    # 2) Mostrar todas las categorías disponibles
-                                    print("\nAvailable categories:")
+                                    #MOSTRAMOS TODAS LA CATEGORIAS QUE PUEDE ESCOGER
                                     for cat_id in dict_categorys:
                                         print(f"{cat_id}. {dict_categorys[cat_id]}")
 
-                                    # 3) Pedir nueva categoría
+                                    
                                     nueva_categoria = int(input("\nSelect the new category ID: "))
 
-                                    # 4) Validar
+                                    
                                     if nueva_categoria in dict_categorys:
                                         dict_characters[id_edit]["category"] = nueva_categoria
                                         print(f"\nCategory changed successfully! New category: {dict_categorys[nueva_categoria]}")
                                     else:
                                         print("\nInvalid category ID. Category not changed.")
 
-                                    # 5) Preguntar si quiere seguir editando este personaje
-                                    op_continue = input("\nDo you want to continue editing this character? Y/N: ").lower()
-                                    if op_continue == "y":
-                                        # seguimos en el while editing (no tocamos flags)
-                                        pass
-                                    elif op_continue == "n":
+                                    op_continue_editing_category = input("\nDo you want to continue editing? Y/N: ").lower()
+                                    if op_continue_editing_category == "y":
+                                        #SALIMOS SOLO DEL BUCLE PARA EDIATR LA CATEGORIA
+                                        continue_editing=False
+                                        
+                                    elif op_continue_editing_category == "n":
                                         editing = False
                                         edit_menu = False
                                         menu_03 = False
                                     else:
-                                        print("Incorrect option, returning to edit menu.")
-                                        editing = False
-                                        edit_menu = False
-                                        menu_03 = False
+                                        print("Incorrect option")
+                                        continue_editing=True
 
                                 elif op ==3:
                                     print("New Weapon")
