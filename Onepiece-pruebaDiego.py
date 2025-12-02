@@ -495,7 +495,7 @@ while not fin_juego:
                                         cambio=True
                                         aux=lista_ids[i]
                                         lista_ids[i]=lista_ids[i+1]
-                                        lista_ids[i+1]=auxmarc
+                                        lista_ids[i+1]=aux
                                 if not cambio:
                                     break
 
