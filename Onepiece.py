@@ -208,7 +208,7 @@ while not fin_juego:
                     print(f"\nWeapon created! ID: {nuevo_weapon_id}, Name: {new_weapon_name}")
 
                 elif op_menu02==3:
-                    equipo=False
+                    
                     menu_02=False
                     
                     
@@ -336,40 +336,6 @@ while not fin_juego:
                                             if weapon_to_delete in dict_characters[id_edit]["weapons"]:
                                                 dict_characters[id_edit]["weapons"].remove(weapon_to_delete)
                                         
-                                        
-
-                                    # #SCAMOS LA CATEGORIA ACTUAL DEL PERS. SELCCIONADO
-                                    # categoria_actual_id = dict_characters[id_edit]["category"]
-                                    # categoria_actual_nombre = dict_categorys[categoria_actual_id]
-                                    # print(f"\nYour category now is: {categoria_actual_nombre} (ID: {categoria_actual_id})")
-
-                                    # #MOSTRAMOS TODAS LA CATEGORIAS QUE PUEDE ESCOGER
-                                    # for cat_id in dict_categorys:
-                                    #     print(f"{cat_id}. {dict_categorys[cat_id]}")
-
-                                    
-                                    # nueva_categoria = int(input("\nSelect the new category ID: "))
-
-                                    
-                                    # if nueva_categoria in dict_categorys:
-                                    #     dict_characters[id_edit]["category"] = nueva_categoria
-                                    #     print(f"\nCategory changed successfully! New category: {dict_categorys[nueva_categoria]}")
-                                    # else:
-                                    #     print("\nInvalid category ID. Category not changed.")
-
-                                    # op_continue_editing_category = input("\nDo you want to continue editing? Y/N: ").lower()
-                                    # if op_continue_editing_category == "y":
-                                    #     #SALIMOS SOLO DEL BUCLE PARA EDIATR LA CATEGORIA
-                                    #     continue_editing=False
-                                        
-                                    # elif op_continue_editing_category == "n":
-                                    #     editing = False
-                                    #     edit_menu = False
-                                    #     menu_03 = False
-                                    # else:
-                                    #     print("Incorrect option")
-                                    #     continue_editing=True
-
                                 elif op ==3:
                                     editing=False
                                     edit_menu=False
