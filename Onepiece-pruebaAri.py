@@ -223,17 +223,17 @@ while not fin_juego:
         menu_04 = True
         while menu_04:
             print(titulo.format(" Menu04 (List) "))
-            print("\n1) List Characters\n2) List Weapons\n3) List Crews\n4) List Ranks\n5) Go back")
+            print("\n1) List characters\n2) List weapons\n3) List crews\n4) List ranks\n5) Go back")
             op_menu04 = int(input("\n-> Option: "))
 
             #===========================
-            # 1) LIST CHARACTERS
+            # 1) Listar personajes
             #===========================
             if op_menu04 == 1:
                 menu_list_char = True
                 while menu_list_char:
-                    print(titulo.format(" List Characters "))
-                    print("\n1) List by ID\n2) List by Name\n3) List by Strength\n4) List by Speed\n5) Go back")
+                    print(titulo.format(" List characters "))
+                    print("\n1) List by ID\n2) List by name\n3) List by strength\n4) List by speed\n5) Go back")
                     op_char = int(input("\n-> Option: "))
 
                     lista_ids = list(dict_characters.keys())
@@ -251,7 +251,7 @@ while not fin_juego:
                             if not cambio:
                                 break
 
-                    # Ordenar por Name
+                    # Ordenar por nombre
                     elif op_char == 2:
                         for pasada in range(len(lista_ids)-1):
                             cambio=False
@@ -266,7 +266,7 @@ while not fin_juego:
                             if not cambio:
                                 break
 
-                    # Ordenar por Strength
+                    # Ordenar por fuerza
                     elif op_char == 3:
                         for pasada in range(len(lista_ids)-1):
                             cambio=False
@@ -281,7 +281,7 @@ while not fin_juego:
                             if not cambio:
                                 break
 
-                    # Ordenar por Speed
+                    # Ordenar por rapidez
                     elif op_char == 4:
                         for pasada in range(len(lista_ids)-1):
                             cambio=False
@@ -323,17 +323,18 @@ while not fin_juego:
                         input("Press Enter to continue")
 
             #===========================
-            # 2) LIST WEAPONS
+            # 2) Listar armas
             #===========================
             elif op_menu04 == 2:
                 menu_list_weap=True
                 while menu_list_weap:
-                    print(titulo.format(" List Weapons "))
-                    print("\n1) List by ID\n2) List by Name\n3) List by Strength\n4) List by Speed\n5) Go back")
+                    print(titulo.format(" List weapons "))
+                    print("\n1) List by ID\n2) List by name\n3) List by strength\n4) List by speed\n5) Go back")
                     op_weap = int(input("\n-> Option: "))
 
                     lista_ids=list(dict_weapons.keys())
 
+                    # Ordenar por ID
                     if op_weap == 1:
                         for pasada in range(len(lista_ids)-1):
                             cambio=False
@@ -346,6 +347,7 @@ while not fin_juego:
                             if not cambio:
                                 break
 
+                    # Ordenar por nombre
                     elif op_weap == 2:
                         for pasada in range(len(lista_ids)-1):
                             cambio=False
@@ -359,7 +361,8 @@ while not fin_juego:
                                     lista_ids[i+1]=aux
                             if not cambio:
                                 break
-
+                    
+                    # Ordenar por fuerza
                     elif op_weap == 3:
                         for pasada in range(len(lista_ids)-1):
                             cambio=False
@@ -371,7 +374,8 @@ while not fin_juego:
                                     lista_ids[i+1]=aux
                             if not cambio:
                                 break
-
+                    
+                    # Ordenar por rapidez
                     elif op_weap == 4:
                         for pasada in range(len(lista_ids)-1):
                             cambio=False
@@ -383,7 +387,8 @@ while not fin_juego:
                                     lista_ids[i+1]=aux
                             if not cambio:
                                 break
-
+                    
+                    # Vuelta al menu 
                     elif op_weap == 5:
                         menu_list_weap=False
                         op_weap=-1
@@ -409,10 +414,10 @@ while not fin_juego:
                         input("Press Enter to continue")
 
             #===========================
-            # 3) LIST CREWS
+            # 3) Listar tripulacion
             #===========================
             elif op_menu04 == 3:
-                print(titulo.format(" Crews List "))
+                print(titulo.format(" Crews list "))
                 print("ID".ljust(5), "NAME".ljust(20), "MEMBERS")
                 print("="*60)
 
@@ -424,7 +429,7 @@ while not fin_juego:
                 input("Press Enter to continue")
 
             #===========================
-            # 4) LIST RANKS
+            # 4) Listar rangos
             #===========================
             elif op_menu04 == 4:
                 print(titulo.format(" Ranks List "))
@@ -439,7 +444,7 @@ while not fin_juego:
                 input("Press Enter to continue")
 
             #===========================
-            # 5) GO BACK
+            # 5) Volver hacia atras
             #===========================
             elif op_menu04 == 5:
                 menu_04=False
@@ -448,7 +453,7 @@ while not fin_juego:
                 print("Invalid option")
 
 #====================================
-# ==========EXIT=====================
+# Salir del juego
 # ===================================
 
     elif op_menu0==5:
