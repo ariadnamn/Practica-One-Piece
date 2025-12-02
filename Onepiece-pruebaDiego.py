@@ -83,63 +83,144 @@ while not fin_juego:
                 print(titulo.format(" Menu02 Create "), menu02)
                 
                 op_menu02=int(input("\n-> Option: "))
-                if op_menu02==1:
-                    print(titulo.format("Menu021 New Character"))
-                    #accedemos al ultimo id para añadir uno despues
-                    ultimo_id=0
-                    for i in dict_characters:
-                        if i >ultimo_id:
-                            ultimo_id=i
-                    nuevo_id=ultimo_id+1
-                    new_name=input("Name of the new character:\n ")
+                if op_menu02 == 1:
+                        print(titulo.format("Menu021 New Character"))
 
+        # 1) Calcular nuevo ID
+                        ultimo_id = 0
+                        for i in dict_characters:
+                            if i > ultimo_id:
+                                ultimo_id = i
+                        nuevo_id = ultimo_id + 1
 
-                    while equipo:
-                        print("\nType of the new character: ", side)
-                        op_side=int(input("\n->Optioin: "))
-                        if op_side==1:
-                            #=========
-                            #==RANKS==
-                            #=========
-                            for rank in dict_categorys:
+        # 2) Pedir datos básicos
+                        new_name = input("Name of the new character:\n")
+                        new_strength = int(input("Strength (1-9):\n "))
+                        new_speed = int(input("Speed (1-9):\n "))
 
-                                #************************************
-                                #ESTO  DE ABAJO ESTÁ MAL CORREGIR MAS TARDE
+        # 3) Elegir “side”: Marine o Pirates
+                        equipo = True
+                        while equipo:
+                            print("\nType of the new character: ", side)
+                            op_side = int(input("\n-> Option: "))
 
-                                #****************************
-                                print(dict_categorys[-1])
-                                print(dict_categorys[-2])
-                                print(dict_categorys[-3])
-                                
-                            op_rank=int(input("\n->Option: "))
-                            equipo=False
-                        elif op_side==2:
-                            #============
-                            #==category==
-                            #============
-                            print()
-                            equipo=False
-                        else:
-                            print(titulo.format("INVALID OPTION"))
-                            input("Press enter to continue")
-                            equipo=True
-                    
+                # =======================
+                #   MARINE  (RANKS)
+                # =======================
+                            if op_side == 1:
+                                print("\nSelect Rank:")
+                    # En dict_categorys, los Marine son 4, 5 y 6
+                                for cat_id in (4, 5, 6):
+                                    print(f"{cat_id}) {dict_categorys[cat_id]}")
+                                new_category = int(input("\n-> Option (rank ID): "))
+
+                                if new_category in (4, 5, 6):
+                        # Añadimos también al dict_ranks correspondiente
+                        # rank 1 -> category 4, rank 2 -> category 5, rank 3 -> category 6
+                                    rank_id = new_category - 3
+                                    dict_ranks[rank_id]["members"].append(nuevo_id)
+                                    equipo = False
+                                else:
+                                    print("Invalid rank")
+
+                # =======================
+                #   PIRATES (CREWS)
+                # =======================
+                            elif op_side == 2:
+                                print("\nSelect Crew:")
+                    # En dict_categorys, los Pirates son 1, 2 y 3
+                                for cat_id in (1, 2, 3):
+                                    print(f"{cat_id}) {dict_categorys[cat_id]}")
+                                new_category = int(input("\n-> Option (crew ID): "))
+
+                                if new_category in (1, 2, 3):
+                            # Añadimos también al dict_crews correspondiente
+                            # crew 1 -> category 1, crew 2 -> category 2, crew 3 -> category 3
+                                    crew_id = new_category
+                                    dict_crews[crew_id]["members"].append(nuevo_id)
+                                    equipo = False
+                                else:
+                                    print("Invalid crew")
+
+                            else:
+                                print(titulo.format("INVALID OPTION"))
+                                input("Press enter to continue")
+                                equipo = True
+
+            # 4) Elegir armas iniciales
+                        new_weapons = []
+                        print(titulo.format("Available Weapons"))
+                        for wid in dict_weapons:
+                            w = dict_weapons[wid]
+                            print(f"{wid}) {w['name']}, Strength {w['strength']}, Speed {w['speed']}")
+
+                        print("\nEnter weapon IDs for this character (0 to finish):")
+                        while True:
+                            wid = int(input("Weapon ID (0 to stop): "))
+                            if wid == 0:
+                                break
+                            if wid in dict_weapons:
+                                new_weapons.append(wid)
+                            else:
+                                print("Invalid weapon ID")
+
+                    # 5) Guardar el personaje en dict_characters
+                            dict_characters[nuevo_id] = {
+                            "name": new_name,
+                            "category": new_category,
+                            "weapons": new_weapons,
+                            "strength": new_strength,
+                            "speed": new_speed,
+                            "experience": 0}
+
+                        print(f"\nCharacter created! ID: {nuevo_id}, Name: {new_name}")
                 elif op_menu02==2:
-                    print(titulo.format(" Menu022 (New Weapon) "))
-                    new_weapon=input("Name of the new weapon:\n")
+                    
+                    print(titulo.format("Menu022 New Weapon"))
+
+                    # 1) Calcular nuevo ID de weapon
+                    ultimo_weapon_id = 0
+                    for wid in dict_weapons:
+                        if wid > ultimo_weapon_id:
+                            ultimo_weapon_id = wid
+                    nuevo_weapon_id = ultimo_weapon_id + 1
+
+                    # 2) Pedir datos básicos del arma
+                    new_weapon_name = input("Name of the new weapon:\n")
+                    new_weapon_strength = int(input("Strength (1-9):\n "))
+                    new_weapon_speed = int(input("Speed (1-9):\n "))
+
+                    # 3) Preguntar si es de dos manos
+                    two = input("Is this weapon two-hands? (Y/N): ").lower()
+                    if two == "y":
+                        new_two_hand = True
+                    else:
+                        new_two_hand = False
+
+                    # 4) Guardar en el diccionario
+                    dict_weapons[nuevo_weapon_id] = {
+                        "name": new_weapon_name,
+                        "strength": new_weapon_strength,
+                        "speed": new_weapon_speed,
+                        "two_hand": new_two_hand
+                    }
+
+                    print(f"\nWeapon created! ID: {nuevo_weapon_id}, Name: {new_weapon_name}")
+
                 elif op_menu02==3:
+                    equipo=False
                     menu_02=False
-                else:
-                    print("Opcion invalida")
-                    menu_02=False
+                    
+                    
+                        
                 
             
 #====================================
 # ==========MENU03 (EDIT)============
 # ===================================  
         elif op_menu0==3:
-             menu_03=True
-             while  menu_03:
+            menu_03=True
+            while  menu_03:
                 print(titulo.format(" Menu03 (Edit Menu) "), menu03)
                 op_menu03=int(input("\n-> Option: "))
                 if op_menu03==1:
@@ -311,21 +392,37 @@ while not fin_juego:
                             print("2)Plus Strenght")
                             print("3)Plus Speed")
                             print("4)Go back")
-                            print("\nSelect feature to edit to weapon")
+                            print("\nSelect feature to edit weapon")
                             op_menu032x=int(input("-> Option: "))
                             if op_menu032x ==1:
                                 new_name_weapon= input("Enter the new name: ")
                                 old_name=dict_weapons[weapon_id]["name"]
-                                confirm= input(f"\nDo you want to change {old_name} by {new_name_weapon}? Y/N: ").lower()
-                                if confirm=="y":
+                                confirm_change_name= input(f"\nDo you want to change {old_name} by {new_name_weapon}? Y/N: ").lower()
+                                if confirm_change_name=="y":
                                     dict_weapons[weapon_id]["name"]=new_name_weapon
                                     print("\nName changed")
                                 else:
                                     print("\nName change cancelled")
                             elif op_menu032x ==2:
-                                print()
+                                new_strength_weapon=int(input("\nEnter the new Strength: "))
+                                old_strength=dict_weapons[weapon_id]["strength"]
+                                name=dict_weapons[weapon_id]["name"]
+                                confirm_change_strength=input(f"\nDo you want to change Strength {old_strength} by {new_strength_weapon} in the weapon {name}? Y/N: ").lower()
+                                if confirm_change_strength=="y":
+                                    dict_weapons[weapon_id]["strength"]=new_strength_weapon
+                                    print("\nStrenght changed")
+                                else:
+                                    print("\nStrenght change cancelled")
                             elif op_menu032x==3:
-                                print()
+                                new_speed_weapon=int(input("\nEnter the new Speed: "))
+                                old_speed=dict_weapons[weapon_id]["speed"]
+                                name=dict_weapons[weapon_id]["name"]
+                                confirm_change_speed=input(f"\nDo you want to change Speed {old_speed} by {new_speed_weapon} in the weapon {name}? Y/n: ").lower()
+                                if confirm_change_speed=="y":
+                                    dict_weapons[weapon_id]["speed"]=new_speed_weapon
+                                    print("\nSpeed changed")
+                                else:
+                                    print("\nSpeed change cancelled")
                             elif op_menu032x ==4:
                                 editing_weapon =False
                             else:
@@ -340,7 +437,6 @@ while not fin_juego:
 #====================================
 # ==========MENU04 (LIST)============
 # ===================================              
-           
         elif op_menu0==4:
             menu_04 = True
             while menu_04:
@@ -399,7 +495,7 @@ while not fin_juego:
                                         cambio=True
                                         aux=lista_ids[i]
                                         lista_ids[i]=lista_ids[i+1]
-                                        lista_ids[i+1]=aux
+                                        lista_ids[i+1]=auxmarc
                                 if not cambio:
                                     break
 
