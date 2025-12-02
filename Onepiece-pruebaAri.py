@@ -90,7 +90,7 @@ while not fin_juego:
 
                 while equipo:
                     print("\nType of the new character: ", side)
-                    op_side=int(input("\n->Optioin: "))
+                    op_side=int(input("\n->Option: "))
                     if op_side==1:
                         for rank in dict_categorys:
                             print(dict_categorys[-1])
