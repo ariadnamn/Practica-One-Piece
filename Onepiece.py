@@ -1,3 +1,4 @@
+#================DICCIONARIOS=====================
 dict_characters = { 1 : {"name" : "Luffy","category": 1, "weapons": [1, 1],"strength" : 6, "speed" :
 7,"experience": 0},
 2 : {"name" : "Zoro","category": 1, "weapons" : [4],"strength" : 5, "speed" : 6,"experience":
@@ -628,10 +629,13 @@ while not fin_juego:
 
                 else:
                             print("Invalid option")
+#====================================
+# =======OPTION 5 (FIN JUEGO)========
+# ===================================   
         elif op_menu0==5:
             print("BYE BYE")
             fin_juego=True
-
+ 
         else:
             print("opcion invalida")
             fin_juego=False
